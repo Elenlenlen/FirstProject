@@ -34,11 +34,11 @@ class Doktor extends Osoba {
             var formaterDate = new Intl.DateTimeFormat("sr-RS");
             var datum = formaterDate.format(new Date());
             if (opcija === 1) {
-                console.log("zakazan pregled za krvni pritisak " + pacijent.ime + "\ndatum" + datum + "\nvreme: " + vreme)
+                console.log("zakazan pregled za krvni pritisak " + pacijent.ime + "\ndatum: " + datum + "\nvreme: " + vreme)
                 return new KrvniPritisak(vreme, datum, pacijent, this);
             }
             else if (opcija === 2) {
-                console.log("zakazan pregled za nivo secera u krvi " + pacijent.ime + "\ndatum" + datum + "\nvreme: " + vreme)
+                console.log("zakazan pregled za nivo secera u krvi " + pacijent.ime + "\ndatum: " + datum + "\nvreme: " + vreme)
                 return new NivoSecera(vreme, datum, pacijent, this);
             }
         }
