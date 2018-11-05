@@ -35,30 +35,31 @@ class Doktor extends Osoba {
             var datum = formaterDate.format(new Date());
             if (opcija === 1) {
                 console.log("zakazan pregled za krvni pritisak " + pacijent.ime + "\ndatum" + datum + "\nvreme: " + vreme)
-                return new KrvniPritisak(vreme, datum, pacijent);
+                return new KrvniPritisak(vreme, datum, pacijent, this);
             }
             else if (opcija === 2) {
                 console.log("zakazan pregled za nivo secera u krvi " + pacijent.ime + "\ndatum" + datum + "\nvreme: " + vreme)
-                return new NivoSecera(vreme, datum, pacijent);
+                return new NivoSecera(vreme, datum, pacijent, this);
             }
         }
     }
 }
 
 class Pregled {
-    constructor(datum, vreme, pacijent) {
+    constructor(datum, vreme, pacijent, doktor) {
         this.datum = datum;
         this.vreme = vreme;
         this.pacijent = pacijent;
+        this.doktor = doktor;
     }
     opisi() {
-        console.log(this.pacijent.ime + "\ndatum" + datum + "\nvreme: " + vreme);
+        console.log(this.doktor + "je zakazao pregled za" + this.pacijent.ime + "\ndatum" + datum + "\nvreme: " + vreme);
     }
 }
 
 class KrvniPritisak extends Pregled {
-    constructor(datum, vreme, pacijent) {
-        super(datum, vreme, pacijent);
+    constructor(datum, vreme, pacijent, doktor) {
+        super(datum, vreme, pacijent, doktor);
         this.gornja = null;
         this.donja = null;
         this.puls = null;
@@ -72,8 +73,8 @@ class KrvniPritisak extends Pregled {
 }
 
 class NivoSecera extends Pregled {
-    constructor(datum, vreme, pacijent) {
-        super(datum, vreme, pacijent);
+    constructor(datum, vreme, pacijent, doktor) {
+        super(datum, vreme, pacijent, doktor);
         this.vrednost = null;
         this.vremeObroka = null;
     }
