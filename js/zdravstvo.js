@@ -53,7 +53,7 @@ class Pregled {
         this.doktor = doktor;
     }
     opisi() {
-        console.log(this.doktor + "je zakazao pregled za" + this.pacijent.ime + "\ndatum" + datum + "\nvreme: " + vreme);
+        console.log(this.doktor + "je zakazao pregled za" + this.pacijent.ime + "\ndatum: " + datum + "\nvreme: " + vreme);
     }
 }
 
@@ -68,7 +68,7 @@ class KrvniPritisak extends Pregled {
         this.gornja = Math.floor((Math.random() * 100) + 1);
         this.donja = Math.floor((Math.random() * 100) + 1);
         this.puls = Math.floor((Math.random() * 100) + 1);
-        console.log("simuliran pregled nivo secera.\ngornja: " + this.gornja + "\ndonja: " + this.donja + "\npuls: " + this.puls);
+        console.log("simuliran pregled krvni pritisak.\ngornja: " + this.gornja + "\ndonja: " + this.donja + "\npuls: " + this.puls);
     }
 }
 
@@ -82,9 +82,9 @@ class NivoSecera extends Pregled {
         this.vrednost = Math.floor((Math.random() * 100) + 1);
         var options = {
             hour: "numeric", minute: "numeric", second: "numeric", hour12: false, timeZone: "Europe/Belgrade",
-            year: 'numeric', month: 'long', day: 'numeric'
+            year: "numeric", month: "long", day: "numeric"
         };
-        var formaterTime = new Intl.DateTimeFormat("sr-RS", options);
+        var formaterTime = new Intl.DateTimeFormat("sr-Latn", options);
         this.vremeObroka = formaterTime.format(new Date());
         console.log("simuliran pregled nivo secera.\nvreme poslednjeg obroka: " + this.vremeObroka + "\nvrednost: " + this.vrednost);
     }
