@@ -12,7 +12,8 @@ class Pacijent extends Osoba {
     this.brojKartona = brojKartona;
     this.doktor = null;
     this.pregledi = [];
-    log(`Kreiran pacijent ${this.ime}`);
+    var logString = `Kreiran pacijent ${this.ime}`;
+    log(logString);
   }
 
   izaberiDoktora(doktor) {
@@ -36,7 +37,8 @@ class Doktor extends Osoba {
     super(ime, prezime);
     this.specijalnost = specijalnost;
     this.pacijenti = [];
-    log(`Kreiran doktor ${this.ime}`);
+    var logString = `Kreiran doktor ${this.ime}`;
+    log(logString);
   }
 
   dodajPacijenta(pacijent) {
@@ -61,6 +63,8 @@ class Doktor extends Osoba {
         pregled = new KrvniPritisak(vreme, datum, pacijent, this);
       } else if (opcija === 2) {
         pregled = new NivoSecera(vreme, datum, pacijent, this);
+      } else if (opcija === 3) {
+        pregled = new NivoHolesterola(vreme, datum, pacijent, this);
       }
       pacijent.dodajPregled(pregled);
     }
@@ -97,6 +101,34 @@ class KrvniPritisak extends Pregled {
     var logString = `krvni pritisak.\nRezultati:\ngornja: ${
       this.gornja
     }\ndonja: ${this.donja}\npuls: ${this.puls}`;
+    log(this.opisi() + logString);
+  }
+}
+
+class NivoHolesterola extends Pregled {
+  constructor(datum, vreme, pacijent, doktor) {
+    super(datum, vreme, pacijent, doktor);
+    this.vrednost = null;
+    this.vremeObroka = null;
+  }
+
+  simulirajProgled() {
+    this.vrednost = Math.floor(Math.random() * 100 + 1);
+    var options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false,
+      timeZone: 'Europe/Belgrade',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+    var formaterTime = new Intl.DateTimeFormat('sr-Latn', options);
+    this.vremeObroka = formaterTime.format(new Date());
+    var logString = `nivo holesterola \nRezultati:\nvreme poslednjeg obroka: ${
+      this.vremeObroka
+    }\nvrednost: ${this.vrednost}`;
     log(this.opisi() + logString);
   }
 }
@@ -151,6 +183,7 @@ function simulacija() {
   dragan.izaberiDoktora(milan);
   milan.zakaziPregled(dragan, 1);
   milan.zakaziPregled(dragan, 2);
+  milan.zakaziPregled(dragan, 3);
   simulirajPreglede(dragan);
 }
 
